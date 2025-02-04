@@ -11,7 +11,7 @@ import lombok.Value;
 public class TransactionExecutionContext {
     @NonNull String commandName; // method or command name that gets executed across shards. Ex. ScatterGather.
     @NonNull String shardName;
-    @NonNull Class<?> daoClass;
+    @NonNull DaoType daoType;
     @NonNull Class<?> entityClass;
     @NonNull OpContext<?> opContext;
 

@@ -1,5 +1,6 @@
 package io.appform.dropwizard.sharding.metrics;
 
+import io.appform.dropwizard.sharding.execution.DaoType;
 import lombok.Builder;
 import lombok.Value;
 
@@ -8,7 +9,7 @@ import lombok.Value;
 public class EntityOpMetricKey {
 
     Class<?> entityClass;
-    Class<?> daoClass;
+    DaoType daoType;
     String commandName;
     String lockedContextMode;
 

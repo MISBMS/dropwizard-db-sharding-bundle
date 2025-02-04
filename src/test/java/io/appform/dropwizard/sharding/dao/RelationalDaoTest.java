@@ -265,7 +265,7 @@ public class RelationalDaoTest {
                 .build();
         MDC.clear();
         relationalDao.save(relationalKey, entityOne);
-        InterceptorTestUtil.validateThreadLocal(RelationalDao.class, RelationalEntity.class);
+        InterceptorTestUtil.validateThreadLocal(RelationalDao.class.getCanonicalName(), RelationalEntity.class);
     }
 
     @Test

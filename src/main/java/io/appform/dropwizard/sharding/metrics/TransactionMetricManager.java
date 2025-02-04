@@ -5,7 +5,6 @@ import com.codahale.metrics.SlidingTimeWindowArrayReservoir;
 import com.codahale.metrics.Timer;
 import com.google.common.base.Strings;
 import io.appform.dropwizard.sharding.config.MetricConfig;
-import io.appform.dropwizard.sharding.dao.LockedContext;
 import io.appform.dropwizard.sharding.dao.operations.lockedcontext.LockAndExecute;
 import io.appform.dropwizard.sharding.execution.TransactionExecutionContext;
 import lombok.val;
@@ -53,7 +52,7 @@ public class TransactionMetricManager {
         val lockedContextMode = context.getOpContext() instanceof LockAndExecute ?
             ((LockAndExecute<?>)context.getOpContext()).getMode().name() : null;
         val metricPrefix = getMetricPrefix("entity", context.getEntityClass().getCanonicalName(),
-                context.getDaoClass().getCanonicalName(),
+                context.getDaoType().getMetricName(),
                 context.getCommandName(),
                 lockedContextMode);
         return getMetricData(metricPrefix);

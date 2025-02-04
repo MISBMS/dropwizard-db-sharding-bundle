@@ -37,6 +37,15 @@ public class UnblacklistShardTask extends Task {
         this.shardManager = shardManager;
     }
 
+    /**
+     * This constructor is used in-multi tenant bundles which will register separate task url for each tenant
+     * Example URL: http://localhost:8081/tasks/{tenantId}.unblacklist?shard=1
+    */
+    public UnblacklistShardTask(String tenantId, ShardManager shardManager) {
+        super(tenantId +".unblacklist");
+        this.shardManager = shardManager;
+    }
+
     @Override
     public void execute(Map<String, List<String>> params, PrintWriter out) throws Exception {
         int shard = TaskUtils.parseShardParam(params);

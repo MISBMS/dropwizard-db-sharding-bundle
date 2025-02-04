@@ -1,12 +1,13 @@
 package io.appform.dropwizard.sharding.dao.operations;
 
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.Session;
+
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 /**
  * Get all the entities by criteria. Iterate over them, mutate it and persist to DB.

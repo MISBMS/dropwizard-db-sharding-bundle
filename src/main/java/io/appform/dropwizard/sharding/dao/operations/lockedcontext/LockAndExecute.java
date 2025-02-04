@@ -4,14 +4,15 @@ import com.google.common.collect.Lists;
 import io.appform.dropwizard.sharding.dao.LockedContext.Mode;
 import io.appform.dropwizard.sharding.dao.operations.OpContext;
 import io.appform.dropwizard.sharding.dao.operations.OpType;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.Session;
+
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Acquires lock on an entity and perform all the operations given. On INSERT mode, creates an

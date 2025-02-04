@@ -2,11 +2,12 @@ package io.appform.dropwizard.sharding.dao.operations.lookupdao;
 
 import io.appform.dropwizard.sharding.dao.operations.OpContext;
 import io.appform.dropwizard.sharding.dao.operations.OpType;
-import java.util.function.Function;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.Builder;
 import org.hibernate.Session;
+
+import java.util.function.Function;
 
 /**
  * Delete an entity by lookup Key.

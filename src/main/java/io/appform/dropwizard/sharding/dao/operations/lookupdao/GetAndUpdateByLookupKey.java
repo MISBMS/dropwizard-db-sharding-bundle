@@ -2,13 +2,14 @@ package io.appform.dropwizard.sharding.dao.operations.lookupdao;
 
 import io.appform.dropwizard.sharding.dao.operations.OpContext;
 import io.appform.dropwizard.sharding.dao.operations.OpType;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.hibernate.Session;
+
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Builder;
-import org.hibernate.Session;
 
 /**
  * Get an entity from DB by lookup key, mutate it and persist it back to DB. All in same hibernate

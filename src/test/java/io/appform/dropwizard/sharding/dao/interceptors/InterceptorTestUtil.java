@@ -1,5 +1,6 @@
 package io.appform.dropwizard.sharding.dao.interceptors;
 
+import io.appform.dropwizard.sharding.execution.DaoType;
 import lombok.experimental.UtilityClass;
 import org.slf4j.MDC;
 
@@ -15,10 +16,10 @@ public class InterceptorTestUtil {
 
     public static final String DAO_END = "dao.end";
 
-    public void validateThreadLocal(final Class<?> daoClass,
+    public void validateThreadLocal(final String daoType,
                                     final Class<?> entityClass) {
-        assertEquals(daoClass.getSimpleName(), MDC.get(DAO_START));
-        assertEquals(daoClass.getSimpleName(), MDC.get(DAO_END));
+        assertEquals(daoType, MDC.get(DAO_START));
+        assertEquals(daoType, MDC.get(DAO_END));
         assertEquals(entityClass.getSimpleName(), MDC.get(ENTITY_START));
         assertEquals(entityClass.getSimpleName(), MDC.get(ENTITY_END));
     }

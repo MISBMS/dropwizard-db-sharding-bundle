@@ -1,14 +1,15 @@
 package io.appform.dropwizard.sharding.dao.operations;
 
-import java.util.function.BiConsumer;
-import java.util.function.BooleanSupplier;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
+
+import java.util.function.BiConsumer;
+import java.util.function.BooleanSupplier;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /**
  * Get entities by criteria over scroll. Iterate over each result, mutate and persist to DB all

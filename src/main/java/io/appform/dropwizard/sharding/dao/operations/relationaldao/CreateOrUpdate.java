@@ -2,16 +2,17 @@ package io.appform.dropwizard.sharding.dao.operations.relationaldao;
 
 import io.appform.dropwizard.sharding.dao.operations.OpContext;
 import io.appform.dropwizard.sharding.dao.operations.OpType;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.val;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Builder;
-import lombok.val;
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
 
 /**
  * Acquire lock on an entity.

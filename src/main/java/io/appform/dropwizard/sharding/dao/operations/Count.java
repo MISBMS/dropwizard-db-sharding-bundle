@@ -1,11 +1,12 @@
 package io.appform.dropwizard.sharding.dao.operations;
 
-import java.util.function.Function;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+
+import java.util.function.Function;
 
 /**
  * Returns count of records matching given criteria for a shard.

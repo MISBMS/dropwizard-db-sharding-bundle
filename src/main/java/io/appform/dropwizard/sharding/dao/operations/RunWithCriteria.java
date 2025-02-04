@@ -1,11 +1,12 @@
 package io.appform.dropwizard.sharding.dao.operations;
 
-import java.util.function.Function;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.Builder;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+
+import java.util.function.Function;
 
 /**
  * Run a query with given criteria inside this shard and returns resulting list.

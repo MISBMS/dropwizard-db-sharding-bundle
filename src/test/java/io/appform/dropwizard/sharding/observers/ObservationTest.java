@@ -40,7 +40,7 @@ public class ObservationTest extends BundleBasedTestBase {
                 return proceed(context, supplier);
             } finally {
                 log.info("Incrementing counter for {}.{}. New Value: {}",
-                        context.getDaoClass().getSimpleName(),
+                        context.getDaoType().name(),
                         context.getCommandName(),
                         callCounter.incrementAndGet());
             }

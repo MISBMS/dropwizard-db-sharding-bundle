@@ -1,12 +1,13 @@
 package io.appform.dropwizard.sharding.dao.operations;
 
-import java.util.function.BiConsumer;
-import java.util.function.Function;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 /**
  * Get an entity from DB, mutate it and persist it back to DB. All in same hibernate

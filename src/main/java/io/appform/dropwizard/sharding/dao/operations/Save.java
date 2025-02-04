@@ -1,11 +1,12 @@
 package io.appform.dropwizard.sharding.dao.operations;
 
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.Session;
+
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /**
  * Persists given entity to the DB.

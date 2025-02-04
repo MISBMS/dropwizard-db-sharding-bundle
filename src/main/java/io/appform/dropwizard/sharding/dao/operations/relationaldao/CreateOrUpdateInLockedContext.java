@@ -4,14 +4,15 @@ import com.google.common.base.Preconditions;
 import io.appform.dropwizard.sharding.dao.operations.OpContext;
 import io.appform.dropwizard.sharding.dao.operations.OpType;
 import io.appform.dropwizard.sharding.dao.operations.SelectParam;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
+import org.hibernate.Session;
+
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Builder;
-import org.hibernate.Session;
 
 /**
  * To be used along with LockAndExecute operation. Performs createOrUpdate on an entity after

@@ -1,11 +1,12 @@
 package io.appform.dropwizard.sharding.dao.operations;
 
 import io.appform.dropwizard.sharding.query.QuerySpec;
-import java.util.function.Function;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.Session;
+
+import java.util.function.Function;
 
 /**
  * Returns count of records matching given query spec for a shard.

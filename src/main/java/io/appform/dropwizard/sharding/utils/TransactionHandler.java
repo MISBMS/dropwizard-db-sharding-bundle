@@ -25,6 +25,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.context.internal.ManagedSessionContext;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
+import org.jboss.logging.MDC;
 
 /**
  * A transaction handler utility class
@@ -32,6 +33,7 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 public class TransactionHandler {
 
 
+    public static final String TENANT_ID = "tenant.id";
     // Context variables
     @Getter
     private Session session;
@@ -50,7 +52,6 @@ public class TransactionHandler {
     }
 
     public void beforeStart() {
-
         session = sessionFactory.openSession();
         try {
             configureSession();
@@ -62,6 +63,8 @@ public class TransactionHandler {
             session.close();
             session = null;
             ManagedSessionContext.unbind(sessionFactory);
+            //Clean up tenant id
+            MDC.remove(TENANT_ID);
             throw th;
         }
     }
@@ -70,7 +73,6 @@ public class TransactionHandler {
         if (session == null) {
             return;
         }
-
         try {
             if (!skipCommit) {
                 commitTransaction();
@@ -84,6 +86,8 @@ public class TransactionHandler {
             session.close();
             session = null;
             ManagedSessionContext.unbind(sessionFactory);
+            //Clean up tenant id
+            MDC.remove(TENANT_ID);
         }
 
     }
@@ -92,13 +96,14 @@ public class TransactionHandler {
         if (session == null) {
             return;
         }
-
         try {
             rollbackTransaction();
         } finally {
             session.close();
             session = null;
             ManagedSessionContext.unbind(sessionFactory);
+            //Clean up tenant id
+            MDC.remove(TENANT_ID);
         }
     }
 
@@ -106,6 +111,11 @@ public class TransactionHandler {
         session.setDefaultReadOnly(readOnly);
         session.setCacheMode(CacheMode.NORMAL);
         session.setHibernateFlushMode(FlushMode.AUTO);
+        //If the bundle is initialized in multitenant mode, each session factory is tagged to
+        //a tenant id. It will be used in encryption support to fetch the appropriate encryptor for the tenant.
+        if(sessionFactory.getProperties().containsKey(TENANT_ID)) {
+            MDC.put(TENANT_ID, sessionFactory.getProperties().get(TENANT_ID).toString());
+        }
     }
 
     private void beginTransaction() {

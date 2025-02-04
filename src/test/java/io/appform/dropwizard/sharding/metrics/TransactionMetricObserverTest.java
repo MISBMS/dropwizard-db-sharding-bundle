@@ -6,6 +6,7 @@ import io.appform.dropwizard.sharding.dao.RelationalDao;
 import io.appform.dropwizard.sharding.dao.operations.Save;
 import io.appform.dropwizard.sharding.dao.operations.lockedcontext.LockAndExecute;
 import io.appform.dropwizard.sharding.dao.testdata.entities.RelationalEntity;
+import io.appform.dropwizard.sharding.execution.DaoType;
 import io.appform.dropwizard.sharding.execution.TransactionExecutionContext;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@ class TransactionMetricObserverTest {
                 transactionMetricObserver.execute(TransactionExecutionContext.builder()
                                                           .commandName("testCommand")
                                                           .shardName("testshard1")
-                                                          .daoClass(RelationalDao.class)
+                                                          .daoType(DaoType.RELATIONAL)
                                                           .entityClass(RelationalEntity.class)
                                                           .opContext(Save.<String, String>builder()
                                                                                .entity("dummy")
@@ -50,7 +51,7 @@ class TransactionMetricObserverTest {
                 .opContext(Save.<String, String>builder().entity("dummy").saver(t->t).build())
                 .entityClass(RelationalDao.class)
                 .shardName("shard")
-                .daoClass(RelationalEntity.class)
+                .daoType(DaoType.RELATIONAL)
                 .build();
         val entityOpMetricData = MetricData.builder()
                 .timer(new Timer())
@@ -82,7 +83,7 @@ class TransactionMetricObserverTest {
                 .opContext(Save.<String, String>builder().entity("dummy").saver(t->t).build())
                 .entityClass(RelationalDao.class)
                 .shardName("shard")
-                .daoClass(RelationalEntity.class)
+                .daoType(DaoType.RELATIONAL)
                 .build();
         val entityOpMetricData = MetricData.builder()
                 .timer(new Timer())
@@ -113,7 +114,7 @@ class TransactionMetricObserverTest {
         assertEquals(1, transactionMetricObserver.getEntityOpMetricCache().size());
         assertEquals(entityOpMetricData, transactionMetricObserver.getEntityOpMetricCache().get(EntityOpMetricKey.builder()
                 .entityClass(context.getEntityClass())
-                .daoClass(context.getDaoClass())
+                .daoType(context.getDaoType())
                 .lockedContextMode(context.getOpContext() instanceof LockAndExecute ?
                     ((LockAndExecute)context.getOpContext()).getMode().name() : null)
                 .commandName(context.getCommandName())

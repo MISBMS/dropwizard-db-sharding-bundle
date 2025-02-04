@@ -21,10 +21,7 @@ import io.appform.dropwizard.sharding.ShardInfoProvider;
 import io.appform.dropwizard.sharding.dao.operations.OpContext;
 import io.appform.dropwizard.sharding.observers.TransactionObserver;
 import io.appform.dropwizard.sharding.utils.TransactionHandler;
-import java.util.Optional;
-import java.util.function.Function;
 import lombok.val;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 /**
@@ -32,16 +29,16 @@ import org.hibernate.SessionFactory;
  */
 public class TransactionExecutor {
 
-    private final Class<?> daoClass;
+    private final DaoType daoType;
     private final Class<?> entityClass;
     private final ShardInfoProvider shardInfoProvider;
     private final TransactionObserver observer;
 
     public TransactionExecutor(final ShardInfoProvider shardInfoProvider,
-                               final Class<?> daoClass,
+                               final DaoType daoType,
                                final Class<?> entityClass,
                                final TransactionObserver observer) {
-        this.daoClass = daoClass;
+        this.daoType = daoType;
         this.entityClass = entityClass;
         this.shardInfoProvider = shardInfoProvider;
         this.observer = observer;
@@ -63,7 +60,7 @@ public class TransactionExecutor {
         boolean completeTransaction) {
         val context = TransactionExecutionContext.builder()
             .commandName(commandName)
-            .daoClass(daoClass)
+            .daoType(daoType)
             .entityClass(entityClass)
             .shardName(shardInfoProvider.shardName(shardId))
             .opContext(opContext)

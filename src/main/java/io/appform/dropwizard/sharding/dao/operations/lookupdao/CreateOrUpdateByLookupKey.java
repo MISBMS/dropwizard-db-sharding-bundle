@@ -2,15 +2,16 @@ package io.appform.dropwizard.sharding.dao.operations.lookupdao;
 
 import io.appform.dropwizard.sharding.dao.operations.OpContext;
 import io.appform.dropwizard.sharding.dao.operations.OpType;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.val;
 import org.hibernate.Session;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 /**
  * Acquire lock on an entity by lookup key. If entity present, performs mutation and updates it.

@@ -4,10 +4,6 @@ import io.appform.dropwizard.sharding.dao.operations.LambdaTestUtils;
 import io.appform.dropwizard.sharding.dao.operations.SelectParam;
 import io.appform.dropwizard.sharding.dao.testdata.entities.Order;
 import io.appform.dropwizard.sharding.dao.testdata.entities.OrderItem;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
 import lombok.val;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
@@ -16,6 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 class CreateOrUpdateInLockedContextTest {
 

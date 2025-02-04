@@ -3,10 +3,9 @@ package io.appform.dropwizard.sharding.metrics;
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.collect.ImmutableSet;
 import io.appform.dropwizard.sharding.config.MetricConfig;
-import io.appform.dropwizard.sharding.dao.LockedContext.Mode;
-import io.appform.dropwizard.sharding.dao.operations.OpContext;
-import io.appform.dropwizard.sharding.dao.operations.Save;
+import io.appform.dropwizard.sharding.dao.LookupDao;
 import io.appform.dropwizard.sharding.dao.operations.lockedcontext.LockAndExecute;
+import io.appform.dropwizard.sharding.execution.DaoType;
 import io.appform.dropwizard.sharding.execution.TransactionExecutionContext;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -62,7 +61,7 @@ class TransactionMetricManagerTest {
     void testGetEntityOpMetricData() {
         val context = TransactionExecutionContext.builder()
                 .entityClass(this.getClass())
-                .daoClass(this.getClass())
+                .daoType(DaoType.LOOKUP)
                 .commandName("read")
                 .shardName("testshard1")
                 .opContext(LockAndExecute.<String>buildForRead().getter(() -> null).build())
@@ -73,10 +72,9 @@ class TransactionMetricManagerTest {
         val metrics = metricRegistry.getMetrics();
         assertEquals(4, metrics.size());
 
-        val metricPrefix = "db.sharding.entity.io_appform_dropwizard_sharding_metrics_TransactionMetricManagerTest." +
-                "io_appform_dropwizard_sharding_metrics_TransactionMetricManagerTest." +
-                "read." +
-                "READ.";
+        val metricPrefix = "db.sharding.entity.io_appform_dropwizard_sharding_metrics_TransactionMetricManagerTest."
+                + "io_appform_dropwizard_sharding_dao_LookupDao"
+                + ".read." + "READ.";
         assertEquals(metrics.get(metricPrefix + "latency"), metricData.getTimer());
         assertEquals(metrics.get(metricPrefix + "total"), metricData.getTotal());
         assertEquals(metrics.get(metricPrefix + "success"), metricData.getSuccess());

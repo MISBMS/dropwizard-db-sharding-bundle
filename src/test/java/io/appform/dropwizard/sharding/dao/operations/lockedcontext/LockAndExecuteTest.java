@@ -1,22 +1,17 @@
 package io.appform.dropwizard.sharding.dao.operations.lockedcontext;
 
-import static org.junit.jupiter.api.Assertions.*;
 import io.appform.dropwizard.sharding.dao.operations.LambdaTestUtils;
-import io.appform.dropwizard.sharding.dao.operations.OpContext;
-import io.appform.dropwizard.sharding.dao.operations.lookupdao.CreateOrUpdateByLookupKey;
 import io.appform.dropwizard.sharding.dao.testdata.entities.Order;
-import io.appform.dropwizard.sharding.dao.testdata.entities.OrderItem;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import lombok.val;
-import org.hamcrest.Matchers;
 import org.hibernate.Session;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class LockAndExecuteTest {
 
